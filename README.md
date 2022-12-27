@@ -141,5 +141,5 @@ Disambiguation:
   
   
   
-  // thsi readme looks rlly bad in main window so if you want to have a better description download it and view it in a text editior (fr i spend so much time making this readme and it looks so bad)
+  // this readme looks rlly bad in main window so if you want to have a better description click on readme file in the files or download it and view it in a text editior (fr i spend so much time making this readme and it looks so bad)
   // this is one of my older plugins and it still has rlly ugly and bad code pls dont judge to hard ill fix it once i have time. also id rather upgrade it with more features than toching the old code and possibly breaking a feature.
