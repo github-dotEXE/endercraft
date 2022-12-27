@@ -1,6 +1,6 @@
 # endercraft
 Minecraft spigot utility plugin "Endercraft"
-
+<pre>
 Versions:
   Tested up to: 1.19.2
   Tested from: 1.15
@@ -9,7 +9,10 @@ Versions:
 Meins Core: https://github.com/github-dotEXE/meins_core/
 
 Commands and Permissions:
-
+  exampleCMD:
+    /CMD <args here> : permission
+      description for cmd here
+    
   heal:
     /heal : endercraft.heal
       heals your hearts and your health
@@ -124,22 +127,4 @@ Disambiguation:
   <xxx...> (<> with anything and dots inside) = variable which extends to more than the 1 arg its on
   <> (empty <>) = anything does the job
   : xxx (: with anything behind it) == the permission needed for the command
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  // this readme looks rlly bad in main window so if you want to have a better description click on readme file in the files or download it and view it in a text editior (fr i spend so much time making this readme and it looks so bad)
-  // this is one of my older plugins and it still has rlly ugly and bad code pls dont judge to hard ill fix it once i have time. also id rather upgrade it with more features than toching the old code and possibly breaking a feature.
+</pre>
