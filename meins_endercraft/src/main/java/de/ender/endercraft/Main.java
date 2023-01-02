@@ -1,6 +1,7 @@
 package de.ender.endercraft;
 
 import de.ender.core.MCore;
+import de.ender.core.UpdateChecker;
 import de.ender.endercraft.commands.*;
 import de.ender.endercraft.listeners.OnDeathListener;
 import de.ender.endercraft.listeners.OnPlayerJoinListener;
@@ -21,8 +22,8 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         FileConfiguration config = Main.getPlugin().getConfig();
-
-        new MCore().log(ChatColor.AQUA + "Starting EnderCraft...");
+        new MCore().log(ChatColor.AQUA + "Enabling EnderCraft...");
+        new UpdateChecker().check("1.1","github-dotEXE","endercraft");
 
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("sudo").setExecutor(new Sudo());
@@ -44,9 +45,11 @@ public class Main extends JavaPlugin {
         getCommand("itemlock").setExecutor(new ItemLock());
         getCommand("repair").setExecutor(new Repair());
         getCommand("floatsign").setExecutor(new InvisSign());
+        getCommand("glide").setExecutor(new Glide());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new OnPlayerJoinListener(), this);
+        pluginManager.registerEvents(new Glide(), this);
         pluginManager.registerEvents(new OnPlayerLeaveListener(), this);
         pluginManager.registerEvents(new OnDeathListener(), this);
 
@@ -87,7 +90,10 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
-        new MCore().log(ChatColor.AQUA + "Stopping EnderCraft...");
+        FileConfiguration config = Main.getPlugin().getConfig();
+        config.set("glide.uuids",null);
+        Main.getPlugin().saveConfig();
+        new MCore().log(ChatColor.AQUA + "Disabling EnderCraft...");
     }
 
     public static Main getPlugin() {

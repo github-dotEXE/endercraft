@@ -1,11 +1,12 @@
 name: meins_endercraft
-version: 1.4
+version: 1.1
 main: de.ender.endercraft.Main
 api-version: 1.19
 load: STARTUP
 depend: [ meins_core ]
 authors: [ ender__exe ]
 description: Endercraft
+website: https://github.com/github-dotEXE
 
 commands:
   heal:
@@ -48,3 +49,5 @@ commands:
     description: /repair!
   floatsign:
     description: /floatsign <Color> <..TEXT..>
+  glide:
+      description: /glide
