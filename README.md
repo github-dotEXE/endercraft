@@ -120,11 +120,14 @@ Commands and Permissions:
   floatsign:
     /floatsign [Color] [TEXT..] : EnderCraft.floatsign
       creates an invisible armorstand at command executor with a visible name named: §[Color] + [TEXT..]
+  
+  glide:
+    /glide : endercraft.glide
+      toggles if command executor will be set to glide mode once falling 1,5 blocks
    
    
 Disambiguation:
   [xxx] ([] with anything inside) = variable
   [xxx...] ([] with anything and dots inside) = variable which extends to more than the 1 arg its on
   [] (empty []) = anything does the job
-  : xxx (: with anything behind it) == the permission needed for the command
 </pre>
