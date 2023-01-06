@@ -10,7 +10,7 @@ website: https://github.com/github-dotEXE
 
 commands:
   heal:
-    description: /heal
+    description: /heal!
   sudo:
     description: /sudo <Player> <Command...>!
   flyspeed:
