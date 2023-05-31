@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="meins_core">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/plugins/meins/meins_core.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

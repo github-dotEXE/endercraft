@@ -1,8 +1,8 @@
 name: meins_endercraft
-version: 1.1
+version: ${version}
 main: de.ender.endercraft.Main
 api-version: 1.19
-load: STARTUP
+load: POSTWORLD
 depend: [ meins_core ]
 authors: [ ender__exe ]
 description: Endercraft
@@ -51,3 +51,13 @@ commands:
     description: /floatsign <Color> <..TEXT..>
   glide:
       description: /glide
+  statistics:
+    description: /statistics <PlayerTarget> <Statistic>
+  advancementprogress:
+    description: /advancementprogress <PlayerTarget> <Statistic>
+  nick:
+    description: /nick
+  clr:
+    description: /clr clears inv
+  i:
+    description: /i

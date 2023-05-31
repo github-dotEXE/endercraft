@@ -8,16 +8,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class Rename implements CommandExecutor {
 
     @SuppressWarnings("deprecation")
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
             if(player.hasPermission("EnderCraft.rename")) {
                 if(args.length >= 1) {
-
                     ItemStack item = player.getItemInHand();
                     ItemMeta itemMeta = item.getItemMeta();
                     String name = String.join(" ", Arrays.copyOfRange(args, 0, args.length)).replace("&", "§");

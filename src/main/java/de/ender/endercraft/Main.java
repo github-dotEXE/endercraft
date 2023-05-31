@@ -1,6 +1,6 @@
 package de.ender.endercraft;
 
-import de.ender.core.MCore;
+import de.ender.core.Log;
 import de.ender.core.UpdateChecker;
 import de.ender.endercraft.commands.*;
 import de.ender.endercraft.listeners.OnDeathListener;
@@ -12,18 +12,18 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Date;
-
 public class Main extends JavaPlugin {
-    static int TaskID;
     private static Main plugin;
+
+    public String SPAWNCONFIG = "spawn_location";
+    public String DEFAULTCONFIG = "configuration";
 
     @Override
     public void onEnable() {
         plugin = this;
         FileConfiguration config = Main.getPlugin().getConfig();
-        new MCore().log(ChatColor.AQUA + "Enabling EnderCraft...");
-        new UpdateChecker().check("1.1","github-dotEXE","endercraft");
+        Log.log(ChatColor.AQUA + "Enabling EnderCraft...");
+        UpdateChecker.check(getDescription().getVersion(),"github-dotEXE","endercraft","master");
 
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("sudo").setExecutor(new Sudo());
@@ -46,6 +46,13 @@ public class Main extends JavaPlugin {
         getCommand("repair").setExecutor(new Repair());
         getCommand("floatsign").setExecutor(new InvisSign());
         getCommand("glide").setExecutor(new Glide());
+        getCommand("statistics").setExecutor(new StatisticsCMD());
+        getCommand("statistics").setTabCompleter(new StatisticsCMD());
+        getCommand("advancementprogress").setExecutor(new AdvancementCMD());
+        getCommand("advancementprogress").setTabCompleter(new AdvancementCMD());
+        getCommand("nick").setExecutor(new NickCMD());
+        getCommand("clr").setExecutor(new ClrCommand());
+        getCommand("i").setExecutor(new GiveCMD());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new OnPlayerJoinListener(), this);
@@ -54,35 +61,10 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new OnDeathListener(), this);
 
         //realtime
-
-
-        if(config.getBoolean("realtime")) {
-            TaskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
-
-                @Deprecated
-                @Override
-                public void run() {
-
-                    long time = 6000;
-                    Date date = new Date();
-
-                    int dateticksH = date.getHours() * 1000;
-                    int dateticksM = date.getMinutes() + date.getMinutes() / 3 * 2;
-                    int dateticksM2 = dateticksM * 10;
-                    int dateticks = dateticksH + dateticksM2;
-
-                    time = dateticks  - 8000;
-
-                    Bukkit.getWorld("world").setTime(time);
-
-
-                }
-            }, 0, 10*20);
-        }
+        RealTime.init();
 
         //configs und so
-        if(config.getString("messages.joinEXTRA") != null ) {
-        } else {
+        if (config.getString("messages.joinEXTRA") == null) {
             config.set("messages.joinEXTRA", "");
             Main.getPlugin().saveConfig();
         }
@@ -93,7 +75,7 @@ public class Main extends JavaPlugin {
         FileConfiguration config = Main.getPlugin().getConfig();
         config.set("glide.uuids",null);
         Main.getPlugin().saveConfig();
-        new MCore().log(ChatColor.AQUA + "Disabling EnderCraft...");
+        Log.log(ChatColor.AQUA + "Disabling EnderCraft...");
     }
 
     public static Main getPlugin() {
