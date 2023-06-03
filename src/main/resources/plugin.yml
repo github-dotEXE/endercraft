@@ -61,3 +61,7 @@ commands:
     description: /clr clears inv
   i:
     description: /i
+  resetworld:
+    permission: endercraft.resetworld
+  demomode:
+    permission: endercraft.demomode

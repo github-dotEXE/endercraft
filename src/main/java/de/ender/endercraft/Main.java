@@ -1,5 +1,6 @@
 package de.ender.endercraft;
 
+import de.ender.core.CConfig;
 import de.ender.core.Log;
 import de.ender.core.UpdateChecker;
 import de.ender.endercraft.commands.*;
@@ -11,6 +12,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.codehaus.plexus.util.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Main extends JavaPlugin {
     private static Main plugin;
@@ -19,11 +24,29 @@ public class Main extends JavaPlugin {
     public String DEFAULTCONFIG = "configuration";
 
     @Override
+    public void onLoad() {
+        CConfig cconfig = new CConfig("reset", this);
+        FileConfiguration config = cconfig.getCustomConfig();
+
+        Bukkit.getWorlds().forEach(world ->{
+            if(!config.getBoolean("reset."+world.getName())) return;
+            File worldFile = new File(Bukkit.getWorldContainer(), world.getName());
+            try {
+                FileUtils.deleteDirectory(worldFile);
+                config.set("reset."+world.getName(),false);
+                cconfig.save();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    @Override
     public void onEnable() {
         plugin = this;
         FileConfiguration config = Main.getPlugin().getConfig();
         Log.log(ChatColor.AQUA + "Enabling EnderCraft...");
-        UpdateChecker.check(getDescription().getVersion(),"github-dotEXE","endercraft","master");
+        new UpdateChecker(this,"github-dotEXE","endercraft","main").check().downloadLatestMeins();
 
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("sudo").setExecutor(new Sudo());
@@ -53,6 +76,9 @@ public class Main extends JavaPlugin {
         getCommand("nick").setExecutor(new NickCMD());
         getCommand("clr").setExecutor(new ClrCommand());
         getCommand("i").setExecutor(new GiveCMD());
+        getCommand("resetworld").setExecutor(new ResetWorldCMD());
+        getCommand("resetworld").setTabCompleter(new ResetWorldCMD());
+        getCommand("demomode").setExecutor(new DemoModeCMD());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new OnPlayerJoinListener(), this);
