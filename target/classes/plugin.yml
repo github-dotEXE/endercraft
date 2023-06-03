@@ -1,5 +1,5 @@
 name: meins_endercraft
-version: 1.20
+version: 1.21
 main: de.ender.endercraft.Main
 api-version: 1.19
 load: POSTWORLD

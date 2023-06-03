@@ -1,0 +1,6 @@
+realtime:
+  offset: -6500
+  enabled: false
+  #for multiplier 1 is 1 minecraft day every real life day
+  #a normal minecraft day would be with multiplier 72
+  multiplier: 1
