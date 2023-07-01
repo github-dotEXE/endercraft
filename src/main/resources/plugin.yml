@@ -1,5 +1,5 @@
 name: meins_endercraft
-version: ${version}
+version: '${project.version}'
 main: de.ender.endercraft.Main
 api-version: 1.19
 load: POSTWORLD
@@ -26,7 +26,7 @@ commands:
   invsee:
     description: /invsee <Player>!
   vanish:
-    description: /vanish! You can write whatever you want behind "/vanish" to send a leave|join Message!
+    description: /vanish!
   chat:
     description: /chat <Massage>!
   enchantitem:

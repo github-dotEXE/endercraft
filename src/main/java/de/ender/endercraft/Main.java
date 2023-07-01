@@ -45,8 +45,8 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         FileConfiguration config = Main.getPlugin().getConfig();
-        Log.log(ChatColor.AQUA + "Enabling EnderCraft...");
-        new UpdateChecker(this,"github-dotEXE","endercraft","main").check().downloadLatestMeins();
+        Log.enable(this);
+        new UpdateChecker(this,"github-dotEXE","endercraft","main").check().downloadLatest("http://exe.ddns.net:8081/releases/de/ender/${name}/${version}/${name}-${version}.jar", "endercraft");
 
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("sudo").setExecutor(new Sudo());
@@ -85,6 +85,8 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new Glide(), this);
         pluginManager.registerEvents(new OnPlayerLeaveListener(), this);
         pluginManager.registerEvents(new OnDeathListener(), this);
+        pluginManager.registerEvents(new Vanish(), this);
+        pluginManager.registerEvents(new Fly(), this);
 
         //realtime
         RealTime.init();
@@ -101,7 +103,7 @@ public class Main extends JavaPlugin {
         FileConfiguration config = Main.getPlugin().getConfig();
         config.set("glide.uuids",null);
         Main.getPlugin().saveConfig();
-        Log.log(ChatColor.AQUA + "Disabling EnderCraft...");
+        Log.disable(this);
     }
 
     public static Main getPlugin() {
