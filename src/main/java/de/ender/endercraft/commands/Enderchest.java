@@ -20,7 +20,7 @@ public class Enderchest implements CommandExecutor {
                 }
             }else if(args.length == 1) {
 
-                if(player.hasPermission("endercraft.Super_ec")) {
+                if(player.hasPermission("endercraft.super_ec")) {
 
                     Inventory inventory = Bukkit.getPlayer(args[0]).getEnderChest();
                     player.openInventory(inventory);

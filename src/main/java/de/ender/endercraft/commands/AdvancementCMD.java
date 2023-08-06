@@ -22,6 +22,7 @@ public class AdvancementCMD implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if(!sender.hasPermission("endercraft.advancement")) return false;
         if(args.length != 2) {
             sender.sendMessage(ChatColor.RED + "Wrong use. See: /help advancementprogress");
             return false;

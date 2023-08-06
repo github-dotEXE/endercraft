@@ -7,6 +7,11 @@
       <option name="url" value="http://repo.etwas--anders.de/releases" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="de.ender-releases" />
+      <option name="name" value="meins_repo" />
+      <option name="url" value="http://repo.etwas--anders.de:8080/releases" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />

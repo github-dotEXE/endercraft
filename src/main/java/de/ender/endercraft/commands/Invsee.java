@@ -12,7 +12,7 @@ public class Invsee implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label,String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("EnderCraft.invsee")) {
+            if(player.hasPermission("endercraft.invsee")) {
                 if(args.length == 1) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if(target != player) {

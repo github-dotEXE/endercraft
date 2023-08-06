@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class DemoModeCMD implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        if(!(sender instanceof Player)) return false;
+        if(!(sender instanceof Player)||!sender.hasPermission("endercraft.demomode")) return false;
         if(args.length != 1) ((Player) sender).showDemoScreen();
         else if (args[0].equals("ALL")) {
             Bukkit.getOnlinePlayers().forEach(Player::showDemoScreen);

@@ -9,7 +9,7 @@ public class FlySpeed implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label,String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("EnderCraft.flySpeed")) {
+            if(player.hasPermission("endercraft.flyspeed")) {
                 if(args.length == 1) {
                     if(player.getAllowFlight() == true) {
                         String speed = args[0];

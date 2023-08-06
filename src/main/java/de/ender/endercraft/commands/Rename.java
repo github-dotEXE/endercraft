@@ -16,7 +16,7 @@ public class Rename implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("EnderCraft.rename")) {
+            if(player.hasPermission("endercraft.rename")) {
                 if(args.length >= 1) {
                     ItemStack item = player.getItemInHand();
                     ItemMeta itemMeta = item.getItemMeta();

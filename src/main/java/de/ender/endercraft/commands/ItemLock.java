@@ -16,7 +16,7 @@ public class ItemLock implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("EnderCraft.itemlock")) {
+            if(player.hasPermission("endercraft.itemlock")) {
                 if(args.length == 1) {
 
                     ItemStack item = player.getItemInHand();

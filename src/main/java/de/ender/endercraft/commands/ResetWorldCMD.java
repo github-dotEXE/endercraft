@@ -23,6 +23,7 @@ public class ResetWorldCMD implements @Nullable CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(!(sender instanceof Player)) return false;
         Player player = (Player) sender;
+        if(!player.hasPermission("endercraft.resetworld")) return false;
         new BoolGUI(player,"Are you sure you want to reset this/these worlds?",false,reset ->{
             if(reset) {
                 CConfig cconfig = new CConfig("reset", Main.getPlugin());

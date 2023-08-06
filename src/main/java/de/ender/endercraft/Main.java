@@ -4,6 +4,7 @@ import de.ender.core.CConfig;
 import de.ender.core.Log;
 import de.ender.core.UpdateChecker;
 import de.ender.endercraft.commands.*;
+import de.ender.endercraft.customItems.Sandwich;
 import de.ender.endercraft.listeners.OnDeathListener;
 import de.ender.endercraft.listeners.OnPlayerJoinListener;
 import de.ender.endercraft.listeners.OnPlayerLeaveListener;
@@ -46,7 +47,7 @@ public class Main extends JavaPlugin {
         plugin = this;
         FileConfiguration config = Main.getPlugin().getConfig();
         Log.enable(this);
-        new UpdateChecker(this,"github-dotEXE","endercraft","main").check().downloadLatest("http://exe.ddns.net:8081/releases/de/ender/${name}/${version}/${name}-${version}.jar", "endercraft");
+        new UpdateChecker(this,"github-dotEXE","endercraft","main").check().downloadLatestMeins();
 
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("sudo").setExecutor(new Sudo());
@@ -97,6 +98,7 @@ public class Main extends JavaPlugin {
             Main.getPlugin().saveConfig();
         }
 
+        new Sandwich().init();
     }
 
     public void onDisable() {

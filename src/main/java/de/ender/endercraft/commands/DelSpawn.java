@@ -15,7 +15,7 @@ public class DelSpawn implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("enderCraft.delspawn")) {
+            if(player.hasPermission("endercraft.delspawn")) {
                 if(args.length == 0) {
 
                     CConfig cconfig = new CConfig(Main.getPlugin().SPAWNCONFIG, Main.getPlugin());

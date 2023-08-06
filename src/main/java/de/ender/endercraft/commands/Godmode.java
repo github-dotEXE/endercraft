@@ -9,7 +9,7 @@ public class Godmode implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label,String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("EnderCraft.godmode")) {
+            if(player.hasPermission("endercraft.godmode")) {
                 if(!player.isInvulnerable()) {
                     player.setInvulnerable(true);
                     player.sendMessage("Godmode: §aON");

@@ -22,6 +22,7 @@ import java.util.List;
 public class StatisticsCMD implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if(!sender.hasPermission("endercraft.statistics")) return false;
         if(args.length <= 1) {
             sender.sendMessage(ChatColor.RED + "Wrong use. See: /help statistics");
             return false;
@@ -67,28 +68,20 @@ public class StatisticsCMD implements CommandExecutor, TabCompleter {
 
         if(args.length == 2) {
             List<Statistic> stats = Arrays.asList(Statistic.values());
-            for(int i = 0; i<=stats.size()-1;i++){
-                commands.add(stats.get(i).toString());
-            }
+            for(int i = 0; i<=stats.size()-1;i++) commands.add(stats.get(i).toString());
         } else if (args.length == 1) {
             List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-            for(int i = 0; i<=players.size()-1;i++){
-                commands.add(players.get(i).getName());
-            }
+            for(int i = 0; i<=players.size()-1;i++) commands.add(players.get(i).getName());
         } else if (args.length == 3) {
             switch(Statistic.valueOf(args[1]).getType()) {
                 case ENTITY:
                     List<EntityType> entities = Arrays.asList(EntityType.values());
-                    for(int i = 0; i<=entities.size()-1;i++){
-                        commands.add(entities.get(i).toString());
-                    }
+                    for(int i = 0; i<=entities.size()-1;i++) commands.add(entities.get(i).toString());
                     break;
                 case ITEM:
                 case BLOCK:
                     List<Material> materials = Arrays.asList(Material.values());
-                    for(int i = 0; i<=materials.size()-1;i++){
-                        commands.add(materials.get(i).toString());
-                    }
+                    for(int i = 0; i<=materials.size()-1;i++) commands.add(materials.get(i).toString());
                     break;
             }
         }

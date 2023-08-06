@@ -16,7 +16,7 @@ public class SetSpawn implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("enderCraft.setspawn")) {
+            if(player.hasPermission("endercraft.setspawn")) {
                 if(args.length == 0) {
 
                     CConfig cconfig = new CConfig(Main.getPlugin().SPAWNCONFIG, Main.getPlugin());

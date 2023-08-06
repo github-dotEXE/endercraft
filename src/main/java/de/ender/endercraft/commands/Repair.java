@@ -12,7 +12,7 @@ public class Repair implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("EnderCraft.repair")) {
+            if(player.hasPermission("endercraft.repair")) {
                 if(args.length == 0) {
                     ItemStack item = player.getItemInHand();
                     if(item.getType().getMaxDurability() >= 1) {

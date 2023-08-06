@@ -16,7 +16,7 @@ public class Enchant implements CommandExecutor {
 
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("EnderCraft.enchantitem")) {
+            if(player.hasPermission("endercraft.enchantitem")) {
                 if(args.length == 2) {
 
                     ItemStack item = player.getItemInHand();

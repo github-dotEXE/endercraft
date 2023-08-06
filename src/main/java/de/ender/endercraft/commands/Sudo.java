@@ -16,7 +16,7 @@ public class Sudo implements CommandExecutor {
 
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            if(player.hasPermission("EnderCraft.sudo")) {
+            if(player.hasPermission("endercraft.sudo")) {
                 if(args.length == 1) {
 
                 } else if(args.length >= 2) {
