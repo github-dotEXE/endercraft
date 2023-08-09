@@ -2,6 +2,7 @@ package de.ender.endercraft.commands;
 
 import de.ender.core.CConfig;
 import de.ender.endercraft.Main;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fly implements CommandExecutor, Listener {
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if(!(sender instanceof Player)||!sender.hasPermission("endercraft.fly")) return false;
 
@@ -27,11 +29,11 @@ public class Fly implements CommandExecutor, Listener {
 
         if(!player.getAllowFlight()) {
             add(player);
-            player.sendMessage(ChatColor.GOLD+"You can fly now!");
+            player.sendMessage(miniMessage.deserialize("<gold>You can fly now!"));
             player.setAllowFlight(true);
         } else {
             remove(player);
-            player.sendMessage(ChatColor.GOLD+"You can no longer fly!");
+            player.sendMessage(miniMessage.deserialize("<gold>You can no longer fly!"));
             player.setAllowFlight(false);
         }
         return true;

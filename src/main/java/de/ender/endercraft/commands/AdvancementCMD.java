@@ -1,5 +1,6 @@
 package de.ender.endercraft.commands;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -19,31 +20,33 @@ import java.util.Collections;
 import java.util.List;
 
 public class AdvancementCMD implements CommandExecutor, TabCompleter {
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(!sender.hasPermission("endercraft.advancement")) return false;
         if(args.length != 2) {
-            sender.sendMessage(ChatColor.RED + "Wrong use. See: /help advancementprogress");
+            sender.sendMessage(miniMessage.deserialize("<red>Wrong use. See: /help advancementprogress"));
             return false;
         }
         NamespacedKey namespacedKey = NamespacedKey.fromString(args[1]);
         if(namespacedKey ==null) {
-            sender.sendMessage(ChatColor.RED + "Wrong use. See: /help advancementprogress");
+            sender.sendMessage(miniMessage.deserialize("<red>Wrong use. See: /help advancementprogress"));
             return false;
         }
         Advancement advancement = Bukkit.getAdvancement(namespacedKey);
         Player target = Bukkit.getPlayer(args[0]);
         if(advancement ==  null || target ==  null) {
-            sender.sendMessage(ChatColor.RED + "Wrong use. See: /help advancementprogress");
+            sender.sendMessage(miniMessage.deserialize("<red>Wrong use. See: /help advancementprogress"));
             return false;
         }
         AdvancementProgress progress = target.getAdvancementProgress(advancement);
         if(progress.isDone()) {
-            sender.sendMessage(ChatColor.GOLD+ args[0] + " has already finished " +args[1] + "!");
+            sender.sendMessage(miniMessage.deserialize("<gold>"+ args[0] + " has already finished " +args[1] + "!"));
             return true;
         }
-        sender.sendMessage(ChatColor.DARK_GREEN+ args[0] + ": " +args[1] + ": Missing: "+ChatColor.GREEN + progress.getRemainingCriteria());
+        sender.sendMessage(miniMessage.deserialize("<dark_green>"+args[0] + ": " +args[1] +
+                ": Missing: <green>"+ progress.getRemainingCriteria()));
         return true;
     }
 

@@ -1,5 +1,6 @@
 package de.ender.endercraft.commands;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Enchant implements CommandExecutor {
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 
-    @SuppressWarnings("deprecation")
     public boolean onCommand(CommandSender sender, Command command, String label,String[] args) {
 
         if(sender instanceof Player) {
@@ -25,9 +26,9 @@ public class Enchant implements CommandExecutor {
                     item.setItemMeta(itemMeta);
 
                 } else
-                    player.sendMessage("§cPlease use §6/enchantitem <enchantment> <level>§c!");
+                    player.sendMessage(miniMessage.deserialize("<red>Please use <gold>/enchantitem <enchantment> <level><red>!"));
             }else
-                player.sendMessage("§cYou have no permission for that command!");
+                player.sendMessage(miniMessage.deserialize("<red>You have no permission for that command!"));
         }else
             sender.sendMessage("That Command is only for Players");
 

@@ -1,6 +1,7 @@
 package de.ender.endercraft.commands;
 
 import de.ender.endercraft.Main;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -24,6 +25,7 @@ import java.util.UUID;
 public class Glide implements Listener, CommandExecutor {
     private final FileConfiguration config = Main.getPlugin().getConfig();
     private List<UUID> uuids = new ArrayList<>();
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 
 
     @EventHandler
@@ -42,7 +44,8 @@ public class Glide implements Listener, CommandExecutor {
         if(event.getEntity() instanceof Player && !event.isGliding()) {
             Player player = (Player) event.getEntity();
             if(uuids.contains(player.getUniqueId())) {
-                if (!player.isOnGround() && (player.getInventory().getChestplate() == null || player.getInventory().getChestplate().getType() != Material.ELYTRA)) {
+                if (!player.isOnGround() && (player.getInventory().getChestplate() == null ||
+                        player.getInventory().getChestplate().getType() != Material.ELYTRA)) {
                     event.setCancelled(true);
                 }
             }
@@ -58,10 +61,10 @@ public class Glide implements Listener, CommandExecutor {
                 UUID uuid = player.getUniqueId();
                 if(uuids.contains(uuid)) {
                     uuids.remove(uuid);
-                    player.sendMessage(ChatColor.GOLD + "Glide Off");
+                    player.sendMessage(miniMessage.deserialize("<gold>Glide Off"));
                 } else {
                     uuids.add(uuid);
-                    player.sendMessage(ChatColor.GREEN + "Glide On");
+                    player.sendMessage(miniMessage.deserialize("<green>Glide On"));
                 }
                 config.set("glide.uuids",uuids);
                 Main.getPlugin().saveConfig();

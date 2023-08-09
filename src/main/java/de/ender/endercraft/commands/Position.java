@@ -1,5 +1,6 @@
 package de.ender.endercraft.commands;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,7 +14,7 @@ import de.ender.endercraft.Main;
 
 
 public class Position implements CommandExecutor {
-
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
     static String Dir = "";
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -27,7 +28,8 @@ public class Position implements CommandExecutor {
                         Location loc = player.getLocation();
                         configset.set("Position." + args[1], loc);
                         Main.getPlugin().saveConfig();
-                        player.sendMessage("§aYou set §6POSITION §r" + args[1] + " §aat §b" + loc.getBlockX() + " " + loc.getBlockY() + " " + loc.getBlockZ() + "§a!");
+                        player.sendMessage(miniMessage.deserialize("<green>You set §6POSITION <reset>" + args[1] +
+                                " <green>at <aqua>" + loc.getBlockX() + " " + loc.getBlockY() + " " + loc.getBlockZ() + "<green>!"));
                     } else if(args[0].equals("get")) {
                         FileConfiguration configget = Main.getPlugin().getConfig();
                         Location loc = configget.getLocation("Position." + args[1]);
@@ -60,23 +62,27 @@ public class Position implements CommandExecutor {
                             Dir = "";
                         }
                         player.teleport(loc2);
-                        player.sendMessage("§aThe §6POSITION §r" + args[1] + " §ais at §b" + loc.getBlockX() + " " + loc.getBlockY() + " " + loc.getBlockZ() + "§9 (" + Dir + ")§a!");
+                        player.sendMessage(miniMessage.deserialize("<green>The <gold>POSITION <reset>" + args[1] +
+                                " <green>is at <aqua>" + loc.getBlockX() + " " +
+                                loc.getBlockY() + " " + loc.getBlockZ() + "<dark_gray> (" + Dir + ")<green>!"));
                     }else if(args[0].equals("del")) {
 
                         FileConfiguration configdel = Main.getPlugin().getConfig();
                         configdel.set("Position." + args[1], null);
                         Main.getPlugin().saveConfig();
-                        player.sendMessage("§cYou've Deleted the Position §6" + args[1]);
+                        player.sendMessage(miniMessage.deserialize("<red>You've Deleted the Position <gold>" + args[1]));
 
                     } else {
-                        player.sendMessage("§cPlease use §6/position set|get|del|list|pos §b" + player.getName() + "§c!!!");
+                        player.sendMessage(miniMessage.deserialize("<red>Please use <gold>/position set|get|del|list|pos <aqua>"
+                                + player.getName() + "<red>!!!"));
                     }
                 }else if(args.length == 1) {
 
                     if(args[0].equals("list")) {
 
                         FileConfiguration configset = Main.getPlugin().getConfig();
-                        player.sendMessage("§5" + configset.getConfigurationSection("Position").getKeys(false).toString());
+                        player.sendMessage(miniMessage.deserialize("<dark_green>" +
+                                configset.getConfigurationSection("Position").getKeys(false)));
 
                     }
 
@@ -84,7 +90,8 @@ public class Position implements CommandExecutor {
 
                     if(args[0].equals("pos")) {
 
-                        Location loc = new Location(player.getWorld(), Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
+                        Location loc = new Location(player.getWorld(), Double.parseDouble(args[1]), Double.parseDouble(args[2]),
+                                Double.parseDouble(args[3]));
                         Vector v = loc.toVector().subtract(player.getLocation().toVector());
                         Location loc2 = player.getLocation();
                         loc2.setDirection(v);
@@ -114,13 +121,14 @@ public class Position implements CommandExecutor {
                             Dir = "";
                         }
                         player.teleport(loc2);
-                        player.sendMessage("§a The Positon is§9 (" + Dir + ")§a from here!");
+                        player.sendMessage(miniMessage.deserialize("<green> The Positon is<gray> (" + Dir + ")<green> from here!"));
 
 
                     }
 
                 }else
-                    player.sendMessage("§cPlease use §6/position set|get|del|list|pos §b" + player.getName() + "§c!!!");
+                    player.sendMessage(miniMessage.deserialize("<red>Please use <gold>/position set|get|del|list|pos <aqua>"
+                            + player.getName() + "<red>!!!"));
             }
         }else
             sender.sendMessage("That Command is only for Players");

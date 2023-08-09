@@ -1,6 +1,7 @@
 package de.ender.endercraft.commands;
 
 import de.ender.core.CConfig;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,7 +13,7 @@ import de.ender.endercraft.Main;
 import org.jetbrains.annotations.NotNull;
 
 public class SetSpawn implements CommandExecutor {
-
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
@@ -23,13 +24,14 @@ public class SetSpawn implements CommandExecutor {
                     FileConfiguration configset = cconfig.getCustomConfig();
                     Location loc = player.getLocation();
                     configset.set("utils.spawn", loc);
-                    player.sendMessage("§aYou set the Spawn to §b" + loc.getBlockX() + " " + loc.getBlockY() + " " + loc.getBlockZ() + "§a!");
+                    player.sendMessage(miniMessage.deserialize("<green>You set the Spawn to <aqua>" + loc.getBlockX() + " "
+                            + loc.getBlockY() + " " + loc.getBlockZ() + "<green>!"));
                     cconfig.save();
 
                 } else
-                    player.sendMessage("§cPlease use §6/setspawn§c!");
+                    player.sendMessage(miniMessage.deserialize("<red>Please use <gold>/setspawn<red>!"));
             }else
-                player.sendMessage("§cYou have no permission for that command!");
+                player.sendMessage(miniMessage.deserialize("<red>You have no permission for that command!"));
         }else
             sender.sendMessage("That Command is only for Players");
         return false;

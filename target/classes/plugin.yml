@@ -1,5 +1,5 @@
 name: meins_endercraft
-version: '1.23'
+version: '1.24'
 main: de.ender.endercraft.Main
 api-version: 1.19
 load: POSTWORLD
@@ -42,13 +42,9 @@ commands:
   realtime:
     description: /realtime!
   rename:
-    description: /rename <Name...>! You can use "&" for Color-Codes!
-  itemlock:
-    description: /itemlock <Code>!
+    description: /rename <Name...>!
   repair:
     description: /repair!
-  floatsign:
-    description: /floatsign <Color> <..TEXT..>
   glide:
       description: /glide
   statistics:
@@ -61,7 +57,5 @@ commands:
     description: /clr clears inv
   i:
     description: /i
-  resetworld:
-    permission: endercraft.resetworld
   demomode:
     permission: endercraft.demomode

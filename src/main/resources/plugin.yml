@@ -42,13 +42,9 @@ commands:
   realtime:
     description: /realtime!
   rename:
-    description: /rename <Name...>! You can use "&" for Color-Codes!
-  itemlock:
-    description: /itemlock <Code>!
+    description: /rename <Name...>!
   repair:
     description: /repair!
-  floatsign:
-    description: /floatsign <Color> <..TEXT..>
   glide:
       description: /glide
   statistics:
@@ -61,7 +57,5 @@ commands:
     description: /clr clears inv
   i:
     description: /i
-  resetworld:
-    permission: endercraft.resetworld
   demomode:
     permission: endercraft.demomode

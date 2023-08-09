@@ -2,6 +2,7 @@ package de.ender.endercraft.commands;
 
 import de.ender.core.CConfig;
 import de.ender.endercraft.Main;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vanish implements CommandExecutor, Listener {
-
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         CConfig cconfig = new CConfig("vanish.yml", Main.getPlugin());
         FileConfiguration config = cconfig.getCustomConfig();
@@ -28,14 +29,14 @@ public class Vanish implements CommandExecutor, Listener {
 
         if(!players.contains(player)) {
             players.add(player);
-            player.sendMessage(ChatColor.GOLD+"You are now in vanish!");
+            player.sendMessage(miniMessage.deserialize("<gold>You are now in vanish!"));
             for (Player p:
                     Bukkit.getOnlinePlayers()) {
                 p.hidePlayer(Main.getPlugin(),player);
             }
         } else {
             players.remove(player);
-            player.sendMessage(ChatColor.GOLD+"You are no longer in vanish!");
+            player.sendMessage(miniMessage.deserialize("<gold>You are no longer in vanish!"));
             for (Player p:
                     Bukkit.getOnlinePlayers()) {
                 p.showPlayer(Main.getPlugin(),player);
@@ -53,7 +54,7 @@ public class Vanish implements CommandExecutor, Listener {
 
         Player player = event.getPlayer();
         if(config.getList("inVanish",new ArrayList<>()).contains(player)){
-            player.sendMessage(ChatColor.GOLD+"You are still in vanish!");
+            player.sendMessage(miniMessage.deserialize("<gold>You are still in vanish!"));
             for (Player p:
                     Bukkit.getOnlinePlayers()) {
                 p.hidePlayer(Main.getPlugin(),player);

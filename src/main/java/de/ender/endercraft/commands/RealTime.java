@@ -2,6 +2,7 @@ package de.ender.endercraft.commands;
 
 import de.ender.core.CConfig;
 import de.ender.endercraft.Main;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.World;
@@ -14,6 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 public class RealTime implements CommandExecutor {
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Deprecated
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
@@ -28,19 +30,19 @@ public class RealTime implements CommandExecutor {
                         config.set("realtime.enabled", false);
                         cconfig.save();
                         Bukkit.getWorld("world").setGameRule(GameRule.DO_DAYLIGHT_CYCLE,true);
-                        Bukkit.broadcastMessage("§aRealTime §4OFF");
+                        Bukkit.broadcast(miniMessage.deserialize("<green>RealTime <dark_red>OFF"));
                     } else {
                         config.set("realtime.enabled", true);
                         cconfig.save();
                         init();
                         Bukkit.getWorld("world").setGameRule(GameRule.DO_DAYLIGHT_CYCLE,false);
-                        Bukkit.broadcastMessage("§aRealTime §2ON");
+                        Bukkit.broadcast(miniMessage.deserialize("<green>RealTime <dark_green>ON"));
                     }
 
                 } else
-                    player.sendMessage("§cPlease use §6/realtime§c!");
+                    player.sendMessage(miniMessage.deserialize("<red>Please use <gold>/realtime<red>!"));
             }else
-                player.sendMessage("§cYou have no permission for that command!");
+                player.sendMessage(miniMessage.deserialize("<red>You have no permission for that command!"));
         }else
             sender.sendMessage("That Command is only for Players");
         return false;

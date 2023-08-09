@@ -6,7 +6,7 @@
 
     <groupId>de.ender</groupId>
     <artifactId>endercraft</artifactId>
-    <version>1.23</version>
+    <version>1.24</version>
     <packaging>jar</packaging>
 
     <name>meins_endercraft</name>
@@ -72,6 +72,11 @@
             <groupId>de.ender</groupId>
             <artifactId>core</artifactId>
             <version>1.32</version>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <version>4.14.0</version>
         </dependency>
     </dependencies>
 </project>

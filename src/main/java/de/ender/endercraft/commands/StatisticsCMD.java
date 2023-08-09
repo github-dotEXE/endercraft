@@ -1,5 +1,6 @@
 package de.ender.endercraft.commands;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -20,17 +21,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class StatisticsCMD implements CommandExecutor, TabCompleter {
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(!sender.hasPermission("endercraft.statistics")) return false;
         if(args.length <= 1) {
-            sender.sendMessage(ChatColor.RED + "Wrong use. See: /help statistics");
+            sender.sendMessage(miniMessage.deserialize("<red>Wrong use. See: /help statistics"));
             return false;
         }
         Statistic statistic = Statistic.valueOf(args[1]);
         Player target = Bukkit.getPlayer(args[0]);
         if(target == null) {
-            sender.sendMessage(ChatColor.RED + "Wrong use. See: /help statistics");
+            sender.sendMessage(miniMessage.deserialize("<red>Wrong use. See: /help statistics"));
             return false;
         }
 
@@ -38,13 +40,15 @@ public class StatisticsCMD implements CommandExecutor, TabCompleter {
             case ENTITY:
                 if(!args[2].equals("*")) {
                     EntityType entity = EntityType.valueOf(args[2]);
-                    sender.sendMessage(ChatColor.DARK_GREEN + args[0] + ": " + args[1] + ": " + args[2] + ": " + target.getStatistic(statistic, entity));
+                    sender.sendMessage(miniMessage.deserialize("<dark_green>" + args[0] + ": " + args[1] + ": " + args[2] + ": "
+                            + target.getStatistic(statistic, entity)));
                 } else {
                     List<EntityType> entities = Arrays.asList(EntityType.values());
                     for(int i = 0; i<=entities.size()-1;i++){
                         EntityType entity = entities.get(i);
                         if(entity != EntityType.UNKNOWN) {
-                            sender.sendMessage(ChatColor.DARK_GREEN + args[0] + ": " + args[1] + ": " + entity.toString() + ": " + target.getStatistic(statistic, entity));
+                            sender.sendMessage(miniMessage.deserialize("<dark_green>" + args[0] + ": " + args[1] + ": " + entity.toString()
+                                    + ": " + target.getStatistic(statistic, entity)));
                         }
                     }
                 }
@@ -52,10 +56,11 @@ public class StatisticsCMD implements CommandExecutor, TabCompleter {
             case ITEM:
             case BLOCK:
                 Material material = Material.valueOf(args[2]);
-                sender.sendMessage(ChatColor.DARK_GREEN+ args[0] + ": " +args[1] + ": " +args[2] + ": " + target.getStatistic(statistic,material));
+                sender.sendMessage(miniMessage.deserialize("<dark_green>"+ args[0] + ": " +args[1] + ": " +args[2]
+                        + ": " + target.getStatistic(statistic,material)));
                 break;
             default:
-                sender.sendMessage(ChatColor.DARK_GREEN+ args[0] + ": " +args[1] + ": " + target.getStatistic(statistic));
+                sender.sendMessage(miniMessage.deserialize("<dark_green>"+ args[0] + ": " +args[1] + ": " + target.getStatistic(statistic)));
                 break;
         }
         return true;
