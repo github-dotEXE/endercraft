@@ -4,6 +4,7 @@ import de.ender.core.Log;
 import de.ender.core.UpdateChecker;
 import de.ender.endercraft.commands.*;
 import de.ender.endercraft.customItems.Sandwich;
+import de.ender.endercraft.listeners.OnPlayerJoinListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -54,6 +55,7 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new Glide(), this);
         pluginManager.registerEvents(new Vanish(), this);
         pluginManager.registerEvents(new Fly(), this);
+        pluginManager.registerEvents(new OnPlayerJoinListener(), this);
 
         //realtime
         RealTime.init();
